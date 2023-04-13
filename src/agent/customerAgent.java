@@ -32,15 +32,16 @@ public class customerAgent extends Agent {
     //Initialize customer information.
     int shiftUnit = 0;
     int shiftStatus = 0;        //(shiftStatus,shiftUnit)  =  (0,0) is stable, (0,x) shift up and others shift down.
+    int spikePeriod = 100;        //num of day for spike order.
 
-    int numOfOrder = 100;
-    int initialOrder = 0;
-    int dayNumOf = 65;
+    int numOfOrder = 100;       //defult number of order
+    int initialOrder = 0;       
+    int dayNumOf = 65;          //defult order transaction period
     int dayTimer = 15000;
     int timePeriod = 0;
     int weekCount = 1;
 
-    int spikePeriod = 100;        //num of day for spike order.
+    
 
     //int[] orderTimerArray = {20000,60000,180000,300000,4200000};
 
