@@ -1,3 +1,5 @@
+import jade.Boot;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,6 +31,8 @@ public class InputMonitor extends JFrame {
 
         resultArea2 = new JTextArea(5, 20);
         resultArea2.setEditable(false);
+        JScrollPane logScrolLPane2 = new JScrollPane(resultArea2);
+        getContentPane().add(logScrolLPane2, BorderLayout.CENTER);
         resultArea2.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("Daily order summary:"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)
@@ -42,11 +46,31 @@ public class InputMonitor extends JFrame {
         ));
 
         // create the add button
-        JButton addButton = new JButton("Add");
+        JButton addButton = new JButton("Start simulation");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // get the input values
+                StringBuilder customerStartText = new StringBuilder();
+                // get the input values (we looking for numofAgent, numOfDayperiopd
+                int numOfAgent = Integer.parseInt((inputField1.getText()));
+                for (int i = 0; i < numOfAgent; i++){
+                    //String tempText = String.format("customer%d:agent.raynorCustomerAgent;",i + 1);       //Row data from Raynor's
+                    String tempText = String.format("customer%d:agent.customerRandomAgent;",i + 1);
+                    customerStartText.append(tempText);
+                }
+                String[] param = new String[2];
+                param[0] = "-gui";
+                param[1] = " specialist:agent.specialistAgent;supplier:agent.supplierAgent;" + customerStartText;
+                //param[2] = String.valueOf(customerStartText);
+                Boot.main(param);
+
+
+
+
+
+
+                /*
+
                 int num1 = Integer.parseInt(inputField1.getText());
                 int num2 = Integer.parseInt(inputField2.getText());
                 int num3 = Integer.parseInt(inputField3.getText());
@@ -60,6 +84,8 @@ public class InputMonitor extends JFrame {
                 resultArea1.setText(Integer.toString(result1));
                 resultArea2.setText(Integer.toString(result2));
                 resultArea3.setText(Integer.toString(result3));
+
+                 */
             }
         });
 
@@ -101,9 +127,9 @@ public class InputMonitor extends JFrame {
                 BorderFactory.createTitledBorder("Enter Input Values"),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
-        inputPanel.add(new JLabel("Input 1:"));
+        inputPanel.add(new JLabel("Number of Customer: "));
         inputPanel.add(inputField1);
-        inputPanel.add(new JLabel("Input 2:"));
+        inputPanel.add(new JLabel("Period: "));
         inputPanel.add(inputField2);
         //inputPanel.add(new JLabel("Input 3:"));
         //inputPanel.add(inputField3);

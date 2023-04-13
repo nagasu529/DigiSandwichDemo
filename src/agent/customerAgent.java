@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class customerAgent extends Agent {
-    customerGui myGui;
+    InputMonitor myGui;
 
     // Put agent initializations here
     ArrayList<customerInfo> customerInfo = new ArrayList<>();
@@ -48,8 +48,8 @@ public class customerAgent extends Agent {
 
     protected void setup() {
         //Initialize
-        myGui = new customerGui(this);
-        myGui.show();
+        //myGui = new InputMonitor();
+        //myGui.show();
         //customerInfo.add(getLocalName(),"HamSandwich","general",100,app.selectProductPrice("HamSandwich","general"),0,0,0);
         customerInfo.add(new customerInfo(getLocalName(),"HamSandwich","general",numOfOrder, app.selectProductPrice("HamSandwich","general"),0,0,0));
 
@@ -109,7 +109,7 @@ public class customerAgent extends Agent {
                 }
                  */
 
-                myGui.displayUI(String.format("Daily order request: %d \n", customerInfo.get(0).numOfOrder));
+                //myGui.displayUI(String.format("Daily order request: %d \n", customerInfo.get(0).numOfOrder),2);
 
                 //customerInfo.get(0).numOfOrder = timePeriodShift(shiftStatus, initialOrder,shiftUnit);    //Using when we have spike situation.
                 if(timePeriod % 7 == 0){
